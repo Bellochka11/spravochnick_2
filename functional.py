@@ -50,22 +50,22 @@ def search(file_name, stroka): # функция поиска по фамилии
     data.close()
 
 
-def remove_contact(file_name, stroka): # функция удаления контакта
-    with open(file_name, 'r') as open_book:
-        lines = open_book.readlines()
-        with open(file_name, 'w') as open_book:
+def remove(file_name, stroka): # функция удаления контакта
+    with open(file_name, 'r') as data:
+        lines = data.readlines()
+        with open(file_name, 'w') as data:
             for line in lines:
                 if stroka in line:
                     print("Строка удалена")
                 else:
                     print(line)    
-                    open_book.write(line)
+                    data.write(line)
 
-def edit(file_name):
-    with open(file_name, 'r+') as open_book:
+def edit(file_name): # функция изменения контакта
+    with open(file_name, 'r+') as data:
         search_param = (input('Введите параметр для поиска: ' ).title())
-        lines = open_book.readlines()
-        open_book.seek(0)
+        lines = data.readlines()
+        data.seek(0)
         for line in lines:
             if search_param in line:
                 print(line)
@@ -73,5 +73,5 @@ def edit(file_name):
                 add_tel = (input('Введите телефон: ' ).title())
                 new_line = add_i +' '+ add_tel + '\n'
                 line = line.replace(line, new_line)
-            open_book.write(line)
-        open_book.truncate()
+            data.write(line)
+        data.truncate()

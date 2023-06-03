@@ -17,13 +17,12 @@ while enter != 4:
         stroka = str(input("Введите фамилию "))
         search(path, stroka) # функция поиска по фамилии
     elif enter == 5:
-        from functional import remove_contact
-        stroka = str(input('Введите Имя или Фамилию для удаления: '))
-        remove_contact(path, stroka)
-
-    elif enter == 6:
-        from functional import edit
-        edit(path)
+        from functional import remove # функция удаления контакта
+        stroka = str(input('Введите фамилию для удаления: '))
+        remove(path, stroka) # функция удаления контакта
+    elif enter == 6: 
+        from functional import edit # функция изменения контакта
+        edit(path) # функция изменения контакта
 
 
 print("спасибо за работу")
