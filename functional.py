@@ -1,4 +1,4 @@
-# 55.  Создать телефонный справочник с возможностью импорта и экспорта данных в формате .txt.
+# 55.  Создать телефонный справочник с возможностью импорта и экспорта данных в формате .tstrokat.
 # Фамилия, имя, отчество, номер телефона - данные, которые должны находиться в файле.
 
 # 1. Программа должна выводить данные
@@ -15,12 +15,12 @@
 # 2 - вывод всех
 # 3 - поиск по фамилии
 # 4 - выход
-#path ='phone book.txt' # создали текстовый файл который называется phone book.txt и положили его в переменную path
-def create(path): # функция создания файла "phone_book.txt"
+#path ='phone book.tstrokat' # создали текстовый файл который называется phone book.tstrokat и положили его в переменную path
+def create(path): # функция создания файла "phone_book.tstrokat"
     try: # если файл уже есть то мы открываем его
         file = open(path, 'r') # file - переменная с которой мы работаем. открыли файл для чтения
     except IOError: # если файла нет то мы его создаем
-        print('Создан новый справочник -> phone_book.txt ')
+        print('Создан новый справочник -> phone_book.tstrokat ')
         file = open(path, 'w') # file - переменная с которой мы работаем. открыли файл для записи
     finally: # закрываем файл
         file.close()
@@ -48,3 +48,30 @@ def search(file_name, stroka): # функция поиска по фамилии
     if a != 123:
         print("нет такого")
     data.close()
+
+
+def remove_contact(file_name, stroka): # функция удаления контакта
+    with open(file_name, 'r') as open_book:
+        lines = open_book.readlines()
+        with open(file_name, 'w') as open_book:
+            for line in lines:
+                if stroka in line:
+                    print("Строка удалена")
+                else:
+                    print(line)    
+                    open_book.write(line)
+
+def edit(file_name):
+    with open(file_name, 'r+') as open_book:
+        search_param = (input('Введите параметр для поиска: ' ).title())
+        lines = open_book.readlines()
+        open_book.seek(0)
+        for line in lines:
+            if search_param in line:
+                print(line)
+                add_i = (input('Введите Имя: ' ).title())
+                add_tel = (input('Введите телефон: ' ).title())
+                new_line = add_i +' '+ add_tel + '\n'
+                line = line.replace(line, new_line)
+            open_book.write(line)
+        open_book.truncate()
